@@ -50,7 +50,7 @@ http {
             proxy_set_header X-Forwarded-Proto \$scheme;
         }
 
-        location /api/ {
+        location /api {
             proxy_pass https://backend:8080;
             proxy_ssl_certificate /etc/nginx/ssl/$DOMAIN.crt;
             proxy_ssl_certificate_key /etc/nginx/ssl/$DOMAIN.key;
