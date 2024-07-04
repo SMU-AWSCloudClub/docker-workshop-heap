@@ -10,7 +10,7 @@ services:
       - "443:443"
     volumes:
       - ./nginx.conf.local:/etc/nginx/nginx.conf:ro #.conf.local is for local setup w/o ssl
-      - ./certs:/etc/nginx/ssl:ro  # Uncomment this line if you're using SSL
+      - /etc/nginx/ssl:/etc/nginx/ssl:ro 
     depends_on:
       - frontend
       - backend

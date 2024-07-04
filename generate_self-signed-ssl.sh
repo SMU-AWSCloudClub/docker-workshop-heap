@@ -1,21 +1,20 @@
 #!/bin/bash
 
 # Variables
-DOMAIN="books.bchwy.com"
-NGINX_CONF="./nginx.conf"
+DOMAIN="books.bchwy.com" # Change this to your group domain
+NGINX_CONF="/etc/nginx/nginx.conf"  # Changed from "./nginx.conf" to the actual path
 
 # Create SSL directory if it doesn't exist
-# sudo mkdir -p /etc/nginx/ssl
-sudo mkdir ./certs
+sudo mkdir -p /etc/nginx/ssl
 
 # Generate a self-signed SSL certificate
 sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
-    -keyout ./certs/$DOMAIN.key \
-    -out ./certs/$DOMAIN.crt \
+    -keyout /etc/nginx/ssl/$DOMAIN.key \
+    -out /etc/nginx/ssl/$DOMAIN.crt \
     -subj "/C=US/ST=State/L=City/O=Organization/OU=Department/CN=$DOMAIN"
 
 # Update Nginx configuration
-sudo tee $NGINX_CONF >/dev/null <<EOL
+sudo tee $NGINX_CONF > /dev/null <<EOL
 events {
     worker_connections 1024;
 }
@@ -57,3 +56,5 @@ http {
     }
 }
 EOL
+
+echo "SSL certificate generated and Nginx configuration updated."
