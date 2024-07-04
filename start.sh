@@ -69,4 +69,4 @@ EOL
 echo "SSL certificate generated and Nginx configuration updated."
 
 # Run docker-compose with the environment variable
-docker-compose -f docker-compose.cloud.yaml up --build
+docker compose -f docker-compose.cloud.yaml up --build
