@@ -2,7 +2,6 @@
 
 # Variables
 DOMAIN="books.bchwy.com"
-SSL_DIR="/etc/nginx/ssl"
 NGINX_CONF="./nginx.conf"
 
 # Create SSL directory if it doesn't exist
