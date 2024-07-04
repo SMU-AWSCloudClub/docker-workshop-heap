@@ -1,6 +1,10 @@
 #!/bin/bash
-export PUBLIC_IP=$(curl -s http://checkip.amazonaws.com)
-# export PUBLIC_IP='localhost'
+
+# ? uncomment if using non-ssl
+# export PUBLIC_IP=$(curl -s http://checkip.amazonaws.com)
+
+# ? this is for SSL
+export PUBLIC_IP='books.bchwy.com' # TODO: replace with your domain
 
 # Generate self signed keys first
 chmod a+x generate_self-signed-ssl.sh
