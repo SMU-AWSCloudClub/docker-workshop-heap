@@ -11,4 +11,4 @@ COPY . .
 COPY wait-for-it.sh /wait-for-it.sh
 RUN chmod +x /wait-for-it.sh
 
-CMD ["/wait-for-it.sh", "db:3306", "--", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080", "--ssl-keyfile", "/app/ssl/books.bchwy.com.key", "--ssl-certfile", "/app/ssl/books.bchwy.com.crt"]
+CMD ["/wait-for-it.sh", "db:3306", "--", "python", "-m", "app.main"]

@@ -68,15 +68,4 @@ def delete_book(book_id: int, db: Session = Depends(get_db)):
 app.include_router(router, prefix="/api")
 
 if __name__ == "__main__":
-    ssl_context = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-    ssl_context.load_cert_chain(
-        certfile="/app/ssl/books.bchwy.com.crt", 
-        keyfile="/app/ssl/books.bchwy.com.key"
-    )
-    uvicorn.run(
-        "main:app", 
-        host="0.0.0.0", 
-        port=8080, 
-        ssl_keyfile="/app/ssl/books.bchwy.com.key",
-        ssl_certfile="/app/ssl/books.bchwy.com.crt"
-    )
+    uvicorn.run("app.main:app", host="0.0.0.0", port=8080, reload=True)
