@@ -1,12 +1,11 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  baseURL: 'http://0.0.0.0:8080',
-});
+const isBrowser = typeof window !== 'undefined';
 
-// instance.interceptors.request.use(request => {
-//   console.log('Axios instance is being used with request:', request);
-//   return request;
-// });
+const instance = axios.create({
+  baseURL: isBrowser
+    ? 'http://localhost:8080'  // Use localhost when in browser
+    : 'http://backend:8080',   // Use service name when in Docker
+});
 
 export default instance;
