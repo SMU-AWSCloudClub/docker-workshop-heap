@@ -40,13 +40,13 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_BACKEND_URL=http://$(curl -s http://checkip.amazonaws.com)/api
+        - NEXT_PUBLIC_BACKEND_URL=http://${PUBLIC_IP}/api
     expose:
       - "3000"
     networks:
       - app_network
     environment:
-      - NEXT_PUBLIC_BACKEND_URL=http://$(curl -s http://checkip.amazonaws.com)/api
+        - NEXT_PUBLIC_BACKEND_URL=http://${PUBLIC_IP}/api
     restart: unless-stopped
 
   db:
