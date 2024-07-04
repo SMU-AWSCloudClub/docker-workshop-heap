@@ -3,8 +3,8 @@ from fastapi import FastAPI, Depends, HTTPException, APIRouter
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
-from app import crud, models, schemas
-from app.database import SessionLocal, engine
+from . import crud, models, schemas
+from .database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -68,9 +68,9 @@ app.include_router(router, prefix="/api")
 
 if __name__ == "__main__":
     uvicorn.run(
-        "main:app",
+        "app.main:app",
         host="0.0.0.0",
         port=8080,
-        ssl_keyfile="/app/ssl/books.bchwy.com.key",  #! comment out if on local
-        ssl_certfile="/app/ssl/books.bchwy.com.crt",  #! comment out if on local
+        ssl_keyfile="/app/ssl/books.bchwy.com.key",
+        ssl_certfile="/app/ssl/books.bchwy.com.crt",
     )
