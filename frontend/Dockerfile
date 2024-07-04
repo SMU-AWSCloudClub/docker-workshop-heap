@@ -12,6 +12,10 @@ RUN npm install
 # Copy the rest of the application code to the working directory
 COPY . .
 
+# Add build-time arguments
+ARG NEXT_PUBLIC_BACKEND_URL
+ENV NEXT_PUBLIC_BACKEND_URL=$NEXT_PUBLIC_BACKEND_URL
+
 # Build the Next.js application
 RUN npm run build
 

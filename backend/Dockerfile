@@ -20,6 +20,8 @@ RUN pip install --no-cache-dir --upgrade pip && \
 
 EXPOSE 8080
 
-# RUN chmod +x /usr/local/bin/wait-for-it.sh
+# Add a script to wait for the database and then start the application
+COPY wait-for-it.sh /wait-for-it.sh
+RUN chmod +x /wait-for-it.sh
 
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
+CMD ["/wait-for-it.sh", "db:3306", "--", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
