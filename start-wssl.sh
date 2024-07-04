@@ -11,9 +11,9 @@ docker compose -f docker-compose.cloud-ssl.yaml up --build -d
 sleep 10
 
 # Obtain SSL certificate using Certbot
-docker-compose run --rm certbot certonly --webroot --webroot-path=/var/www/certbot -d $PUBLIC_IP
+docker compose run --rm certbot certonly --webroot --webroot-path=/var/www/certbot -d $PUBLIC_IP
 
 # Reload Nginx to apply the new certificate
-docker-compose exec nginx nginx -s reload
+docker compose exec nginx nginx -s reload
 
 echo "SSL certificate obtained and Nginx reloaded."
