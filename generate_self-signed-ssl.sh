@@ -2,7 +2,7 @@
 
 # Variables
 DOMAIN="books.bchwy.com" # Change this to your group domain
-NGINX_CONF="/etc/nginx/nginx.conf"  
+NGINX_CONF="/etc/nginx/nginx.conf"
 
 # Create SSL directory if it doesn't exist
 sudo mkdir -p /etc/nginx/ssl
@@ -14,7 +14,7 @@ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
     -subj "/C=US/ST=State/L=City/O=Organization/OU=Department/CN=$DOMAIN"
 
 # Update Nginx configuration
-sudo tee $NGINX_CONF > /dev/null <<EOL
+sudo tee $NGINX_CONF >/dev/null <<EOL
 events {
     worker_connections 1024;
 }
@@ -40,14 +40,21 @@ http {
 
         location / {
             proxy_pass http://frontend:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade \$http_upgrade;
+            proxy_set_header Connection 'upgrade';
             proxy_set_header Host \$host;
+            proxy_cache_bypass \$http_upgrade;
             proxy_set_header X-Real-IP \$remote_addr;
             proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
             proxy_set_header X-Forwarded-Proto \$scheme;
         }
 
         location /api/ {
-            proxy_pass http://backend:8080;
+            proxy_pass https://backend:8080;
+            proxy_ssl_certificate /etc/nginx/ssl/$DOMAIN.crt;
+            proxy_ssl_certificate_key /etc/nginx/ssl/$DOMAIN.key;
+            proxy_ssl_verify off;
             proxy_set_header Host \$host;
             proxy_set_header X-Real-IP \$remote_addr;
             proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
