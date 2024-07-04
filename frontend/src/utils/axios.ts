@@ -6,6 +6,7 @@ console.log('Backend URL:', backendUrl);
 
 const instance = axios.create({
   baseURL: backendUrl,
+  
 });
 
 export default instance;
