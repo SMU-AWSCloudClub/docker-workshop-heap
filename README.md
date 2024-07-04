@@ -21,4 +21,4 @@ Welcome to the Docker Workshop repository! This workshop teaches the basics of c
 4. Any code editor (VSCode, Sublime, Notepad++, etc.)
 
 ## Getting Start
-<notion guide here># dockerizeme
+<notion guide here>
