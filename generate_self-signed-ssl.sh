@@ -2,7 +2,7 @@
 
 # Variables
 DOMAIN="books.bchwy.com" # Change this to your group domain
-NGINX_CONF="/etc/nginx/nginx.conf"  # Changed from "./nginx.conf" to the actual path
+NGINX_CONF="/etc/nginx/nginx.conf"  
 
 # Create SSL directory if it doesn't exist
 sudo mkdir -p /etc/nginx/ssl
