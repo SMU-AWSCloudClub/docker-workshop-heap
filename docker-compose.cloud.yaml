@@ -9,8 +9,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf.local:/etc/nginx/nginx.conf:ro
-      # - ./ssl:/etc/nginx/ssl:ro  # Uncomment this line if you're using SSL
+      - ./nginx.conf.local:/etc/nginx/nginx.conf:ro #.conf.local is for local setup w/o ssl
+      - ./certs:/etc/nginx/ssl:ro  # Uncomment this line if you're using SSL
     depends_on:
       - frontend
       - backend
@@ -40,13 +40,13 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - NEXT_PUBLIC_BACKEND_URL=http://localhost/api
+        - NEXT_PUBLIC_BACKEND_URL=http://$(curl -s http://checkip.amazonaws.com)/api
     expose:
       - "3000"
     networks:
       - app_network
     environment:
-      - NEXT_PUBLIC_BACKEND_URL=http://localhost/api
+      - NEXT_PUBLIC_BACKEND_URL=http://$(curl -s http://checkip.amazonaws.com)/api
     restart: unless-stopped
 
   db:

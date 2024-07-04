@@ -5,21 +5,7 @@ events {
 http {
     server {
         listen 80;
-        server_name yourdomainhere.com;
-
-        # Redirect all HTTP requests to HTTPS
-        return 301 https://$host$request_uri;
-    }
-
-    server {
-        listen 443 ssl;
-        server_name yourdomainhere.com
-
-        ssl_certificate /etc/nginx/ssl/yourdomainhere.com.crt;
-        ssl_certificate_key /etc/nginx/ssl/yourdomainhere.com.key;
-
-        ssl_protocols TLSv1.2 TLSv1.3;
-        ssl_ciphers HIGH:!aNULL:!MD5;
+        server_name localhost;  # Replace with your domain name if you have one
 
         location / {
             proxy_pass http://frontend:3000;
