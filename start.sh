@@ -6,7 +6,7 @@ export PUBLIC_IP=$(curl -s http://checkip.amazonaws.com)
 
 # Generate self signed keys first
 chmod a+x generate_self-signed-ssl.sh
-./generate_self-signed-ssl
+./generate_self-signed-ssl.sh
 
 # Run docker-compose with the environment variable
 docker compose -f docker-compose.cloud.yaml up -d --build
