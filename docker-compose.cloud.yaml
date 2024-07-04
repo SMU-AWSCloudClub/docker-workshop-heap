@@ -6,7 +6,7 @@ services:
   nginx:
     image: nginx:latest
     ports:
-      - "80:80"
+      # - "80:80"
       - "443:443"
     volumes:
       - ./nginx.conf.local:/etc/nginx/nginx.conf:ro #.conf.local is for local setup w/o ssl
