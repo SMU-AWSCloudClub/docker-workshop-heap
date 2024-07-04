@@ -1,3 +1,5 @@
+version: '3'
+
 networks:
   app_network:
     driver: bridge
@@ -9,7 +11,8 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf.local:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - /etc/nginx/ssl:/etc/nginx/ssl:ro
     depends_on:
       - frontend
       - backend
@@ -20,7 +23,9 @@ services:
   backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: cloud.Dockerfile
+    volumes:
+      - /etc/nginx/ssl:/app/ssl:ro
     expose:
       - "8080"
     networks:
@@ -37,15 +42,15 @@ services:
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile
+      dockerfile: cloud.Dockerfile
       args:
-        - NEXT_PUBLIC_BACKEND_URL=http://localhost/api
+        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
     expose:
       - "3000"
     networks:
       - app_network
     environment:
-      - NEXT_PUBLIC_BACKEND_URL=http://localhost/api
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
     restart: unless-stopped
 
   db:
