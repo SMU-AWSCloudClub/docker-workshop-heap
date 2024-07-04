@@ -5,6 +5,8 @@
 
 # ? this is for SSL
 export PUBLIC_IP='books.bchwy.com' # TODO: replace with your domain
+export NEXT_PUBLIC_BACKEND_URL="https://${PUBLIC_IP}/api"
+
 
 # Generate self signed keys first
 chmod a+x generate_self-signed-ssl.sh

@@ -44,7 +44,7 @@ services:
       context: ./frontend
       dockerfile: cloud.Dockerfile
       args:
-        - NEXT_PUBLIC_BACKEND_URL=https://${PUBLIC_IP}/api
+        - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
     volumes:
       - /etc/nginx/ssl:/app/ssl:ro
     expose:
@@ -52,7 +52,7 @@ services:
     networks:
       - app_network
     environment:
-      - NEXT_PUBLIC_BACKEND_URL=https://${PUBLIC_IP}/api
+      - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
     restart: unless-stopped
 
   db:
