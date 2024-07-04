@@ -71,6 +71,6 @@ if __name__ == "__main__":
         "main:app",
         host="0.0.0.0",
         port=8080,
-        ssl_keyfile="/app/ssl/books.bchwy.com.key",
-        ssl_certfile="/app/ssl/books.bchwy.com.crt",
+        ssl_keyfile="/app/ssl/books.bchwy.com.key",  #! comment out if on local
+        ssl_certfile="/app/ssl/books.bchwy.com.crt",  #! comment out if on local
     )
