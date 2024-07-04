@@ -9,7 +9,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx.conf.local:/etc/nginx/nginx.conf:ro #.conf.local is for local setup w/o ssl
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro #.conf.local is for local setup w/o ssl
       - /etc/nginx/ssl:/etc/nginx/ssl:ro 
     depends_on:
       - frontend
