@@ -20,5 +20,5 @@ Welcome to the Docker Workshop repository! This workshop teaches the basics of c
 3. [Node.js and NPM](https://nodejs.org/en/download/package-manager)
 4. Any code editor (VSCode, Sublime, Notepad++, etc.)
 
-## Getting Start
-<notion guide here>
+## Getting Started (practice 6)
+https://bchewy.notion.site/HEAP-Docker-Workshop-Follow-Along-Workshop-Guide-c2affae6c5a74abaadfa3c45c36fa557?pvs=4
