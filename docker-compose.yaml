@@ -4,7 +4,7 @@ networks:
 
 services:
 
-  #! NGINX REVERSE PROXY!!
+  #! NGINX Service (in reverse proxy mode)
   # ? Why do we need a reverse proxy here?
   # If you look in nginx.conf, we actually redirect all our /api/ urls into our backend docker container.
 
@@ -22,7 +22,7 @@ services:
       - app_network
     restart: unless-stopped
 
-  #! BACKEND!!
+  #! BACKEND Service
   backend:
     build:
       context: ./backend
@@ -40,7 +40,7 @@ services:
       - DB_NAME=booklibrary
     restart: unless-stopped
 
-  #! FRONTEND
+  #! FRONTEND Service
   frontend:
     build:
       context: ./frontend
