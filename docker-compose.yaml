@@ -5,6 +5,9 @@ networks:
 services:
 
   #! NGINX REVERSE PROXY!!
+  # ? Why do we need a reverse proxy here?
+  # If you look in nginx.conf, we actually redirect all our /api/ urls into our backend docker container.
+
   nginx:
     image: nginx:latest
     ports:
@@ -24,7 +27,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    expose:
+    expose: # Makes 8080 known to other services within the same docker app_network
       - "8080"
     networks:
       - app_network
@@ -44,7 +47,7 @@ services:
       dockerfile: Dockerfile
       args:
         - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
-    expose:
+    expose: # Makes 3000 known to other services within the same docker app_network
       - "3000"
     networks:
       - app_network
@@ -52,11 +55,15 @@ services:
         - NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
     restart: unless-stopped
 
+  #! Database service
+  # ? MariaDB is a fork of MySQL
   db:
     image: mariadb:latest
     environment:
       MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
       MARIADB_DATABASE: booklibrary
+    expose: # Makes 3306 known to other services within the same docker app_network
+      - "3306"
     networks:
       - app_network
     volumes:

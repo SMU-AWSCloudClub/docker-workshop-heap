@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     default-mysql-client \
     libmariadb-dev \
+    dos2unix \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -22,6 +23,6 @@ EXPOSE 8080
 
 # Add a script to wait for the database and then start the application
 COPY wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
+RUN dos2unix /wait-for-it.sh && chmod +x /wait-for-it.sh
 
 CMD ["/wait-for-it.sh", "db:3306", "--", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]

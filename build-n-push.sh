@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Build and push frontend image
-docker build -t pleasechange_thisibeg/frontend:latest -f frontend/Dockerfile .
-docker push pleasechange_thisibeg/frontend:latest
+docker build -t bchewy/frontend:latest -f frontend/Dockerfile .
+docker push bchewy/frontend:latest
 
 # Build and push backend image
-docker build -t pleasechange_thisibeg/backend:latest -f backend/Dockerfile .
-docker push pleasechange_thisibeg/backend:latest
+docker build -t bchewy/backend:latest -f backend/Dockerfile .
+docker push bchewy/backend:latest
